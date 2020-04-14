@@ -28,6 +28,7 @@ plt.ylabel("Price")"""
 
 #grouping
 df_test=df[['drive-wheels','body-style','price']]
+df_grp2=df_test.groupby(['drive-wheels'],as_index=False).mean()
 df_grp=df_test.groupby(['drive-wheels','body-style'],as_index=False).mean()
 
 #pivot
@@ -53,6 +54,7 @@ P-values:
     0.5<x<0.1 weak certainty
     x>0.1 no certainty
 """
+
 pearson_coef, p_values= stats.pearsonr(df['horsepower'],df['price'])
 df=df.drop(['Unnamed: 0'], axis=1)
 df.columns
