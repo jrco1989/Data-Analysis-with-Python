@@ -14,6 +14,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score
 
 #Linear Regression and Multiple Linear Regression
 #path = 'https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/DA0101EN/automobileEDA.csv'
@@ -123,10 +125,47 @@ pipe2=Pipeline(Input2)
 pipe2.fit(Z,y)
 ypipe2=pipe2.predict(Z)
 ypipe2[0:10]
+#sns.distplot(ypipe2, hist=False, color='b', label='other same fitted values',)
 
 #Measures for In-Sample Evaluation
 #highway_mpg_fit
 X = df[['highway-L/100km']]
 lm.fit(X, y)
+
 # Find the R^2
 print('The R-square is: ', lm.score(X, y))
+Yhat5=lm.predict(X)
+print('The output of the first four predicted value is: ', Yhat5[0:4])
+
+#Mean Squared Error
+mse = mean_squared_error(df['price'], Yhat)
+print('The mean square error of price and predicted value is: ', mse)
+
+#calculations for Multiple Linear Regression
+# fit the model 
+lm.fit(Z, df['price'])
+# Find the R^2
+print('The R-square is: ', lm.score(Z, df['price']))
+Y_predict_multifit = lm.predict(Z)
+print('The mean square error of price and predicted value using multifit is: ', mean_squared_error(df['price'], Y_predict_multifit))
+#mean_squared_error(df['price'], Y_predict_multifit))
+
+#Model 3: Polynomial Fit
+#let’s import the function r2_score from the module metrics as we are using a different function    
+r_squared = r2_score(y, p(x))
+print('The R-square value is: ', r_squared)
+mean_squared_error(df['price'], p(x))
+
+#now we´ll use to method predict 
+import matplotlib.pyplot as plt
+import numpy as np
+new_input=np.arange(1, 100, 1).reshape(-1, 1)
+lm.fit(X, y)
+lm
+yhat6=lm.predict(new_input)
+yhat6[0:5]
+plt.plot(new_input, yhat6)
+plt.show()
+
+#Simple Linear Regression model (SLR) vs Multiple Linear Regression model (MLR)
+#Simple Linear Model (SLR) vs Polynomial Fit
