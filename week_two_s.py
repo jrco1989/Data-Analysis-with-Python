@@ -1,5 +1,7 @@
-import pandas as pd 
 import numpy as np
+import pandas as pd 
+
+
 df=pd.read_csv('./data_analysis/data/auto.csv')
 df=df.dropna(axis=1)
 df['normalized-losses']

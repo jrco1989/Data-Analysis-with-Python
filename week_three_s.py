@@ -1,8 +1,11 @@
-import pandas as pd
-import seaborn as sns
+from scipy import stats
+
 import matplotlib.pylab as plt 
 import numpy as np
-from scipy import stats
+import pandas as pd
+import seaborn as sns
+
+
 
 df=pd.read_csv('./data/auto3.csv')
 print(df)
